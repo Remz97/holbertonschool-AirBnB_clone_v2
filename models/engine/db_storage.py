@@ -66,7 +66,6 @@ class DBStorage:
 
     def close(self):
         """Closes Session"""
-        self.reload()
         self.__session.close()
 
     def reload(self):
@@ -75,3 +74,8 @@ class DBStorage:
         db_fac = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(db_fac)
         self.__session = Session()
+
+    def close(self):
+        """Close session"""
+        self.reload()
+        self.__session.close()
